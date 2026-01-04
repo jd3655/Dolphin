@@ -184,6 +184,28 @@ python demo_layout.py --model_path ./hf_model --save_dir ./results \
 ````
 
 
+## 🖥️ GUI
+
+We provide a lightweight Gradio interface for local drag-and-drop parsing.
+
+```bash
+# Install dependencies (includes Gradio)
+pip install -r requirements.txt
+
+# Launch the GUI (runs locally)
+python app.py
+```
+
+- **Accepted file types:** `.png`, `.jpg`, `.jpeg`, `.webp`, `.pdf` (single or multiple uploads).
+- **Outputs:** saved under the configured output directory (default `./results_gui`) in `markdown/`, `output_json/` (images), or `recognition_json/` (PDFs) alongside layout visualizations and extracted figures.
+- **API helper:** programmatic access is available via `dolphin_app.parser.parse_document(input_path, model_path, save_dir, max_batch_size=8, device=None)`.
+
+### GUI smoke test
+
+1. Run `python app.py` and open the local Gradio link.
+2. Drag a sample PNG/JPG, keep defaults (`./hf_model`, `./results_gui`), and click **Parse** to view Markdown/JSON previews.
+3. Drag a PDF and repeat — combined Markdown/JSON outputs are written to the same output directory and downloadable from the UI (including a “download all” zip).
+
 ## 🌟 Key Features
 
 - 🔄 Two-stage analyze-then-parse approach based on a single VLM

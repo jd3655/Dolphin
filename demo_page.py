@@ -16,11 +16,12 @@ from utils.utils import *
 
 
 class DOLPHIN:
-    def __init__(self, model_id_or_path):
+    def __init__(self, model_id_or_path, device=None):
         """Initialize the Hugging Face model
         
         Args:
             model_id_or_path: Path to local model or Hugging Face model ID
+            device: Optional device override ("cuda", "cpu"), defaults to auto-detection
         """
         # Load model from local path or Hugging Face hub
         self.processor = AutoProcessor.from_pretrained(model_id_or_path)
@@ -28,7 +29,7 @@ class DOLPHIN:
         self.model.eval()
         
         # Set device and precision
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
 
         if self.device == "cuda":
